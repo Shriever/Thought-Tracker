@@ -6,7 +6,7 @@
 
 USER_THOUGHT=$(zenity --entry --text="What are you thinking about?")
 THOUGHT_CONNOTATION=$(zenity --list --title="Is this thought positive, negative or neutral?" --column="Feeling:" Positive Neutral Negative)
-
+EMAIL=${1}
 
 if [[ "${?}" -ne 0 ]]
 then
@@ -16,5 +16,8 @@ fi
 DATE=$(date +%D)
 TIME=$(date +%T)
 
-echo "${USER_THOUGHT} | ${THOUGHT_CONNOTATION} | Date: ${DATE} ${TIME}" >> ~/thoughts.txt
+# save thought data to a DB using python
+python postThought.py "${USER_THOUGHT}" "${THOUGHT_CONNOTATION}" "${DATE}" "${TIME}" "${EMAIL}"
+# echo "${USER_THOUGHT} | ${THOUGHT_CONNOTATION} | Date: ${DATE} ${TIME} | Email: ${1}" >> ~/thoughts.txt
+# echo "${USER_THOUGHT} | ${THOUGHT_CONNOTATION} | Date: ${DATE} ${TIME} | Email: ${1}"
 
