@@ -12,6 +12,13 @@ then
 fi
 
 USER_THOUGHT=$(zenity --entry --text="What are you thinking about?")
+
+if [[ "${?}" -ne 0 ]]
+then
+  echo 'Something went wrong! :('
+  exit 1
+fi
+
 THOUGHT_CONNOTATION=$(zenity --list --title="Is this thought positive, negative or neutral?" --column="Feeling:" Positive Neutral Negative)
 
 if [[ "${?}" -ne 0 ]]
